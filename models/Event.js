@@ -17,11 +17,7 @@ const EventSchema = Schema(
       type: Date,
       required: true,
     },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
+  
   },
   {
     timestamps: true,

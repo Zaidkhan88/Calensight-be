@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import dbConnection from './database/config.js';
-import authRouter from './routes/auth.js';
+// import authRouter from './routes/auth.js';
 import eventsRouter from './routes/events.js';
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 //#region Routes
-app.use('/api/auth', authRouter);
+// app.use('/api/auth', authRouter);
 app.use('/api/events', eventsRouter);
 //#endregion
 

@@ -6,7 +6,7 @@ export const createEvent = async (req = request, res = response) => {
 
   try {
     // req.uid coming from jwtValidator middleware
-    event.user = req.uid;
+    // event.user = req.uid;
 
     const savedEvent = await event.save();
 
@@ -27,7 +27,7 @@ export const createEvent = async (req = request, res = response) => {
 
 export const getEvents = async (req = request, res = response) => {
   try {
-    const userId = req.uid;
+    // const userId = req.uid;
     const events = await Event.find({ user: userId }).populate('user', 'name');
 
     return res.status(200).json({
@@ -47,7 +47,7 @@ export const getEvents = async (req = request, res = response) => {
 
 export const updateEvent = async (req = request, res = response) => {
   const eventId = req.params.id;
-  const uid = req.uid;
+  // const uid = req.uid;
 
   try {
     const event = await Event.findById(eventId);
@@ -68,7 +68,7 @@ export const updateEvent = async (req = request, res = response) => {
 
     const updatedEventInfo = {
       ...req.body,
-      user: uid,
+      // user: uid,
     };
 
     const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventInfo, {
@@ -94,7 +94,7 @@ export const updateEvent = async (req = request, res = response) => {
 
 export const deleteEvent = async (req = request, res = response) => {
   const eventId = req.params.id;
-  const userId = req.uid;
+  // const userId = req.uid;
 
   try {
     const event = await Event.findById(eventId);
@@ -106,12 +106,7 @@ export const deleteEvent = async (req = request, res = response) => {
       });
     }
 
-    if (event.user.toString() !== userId) {
-      return res.status(401).json({
-        ok: false,
-        msg: 'User does not have privileges to delete the event',
-      });
-    }
+   
 
     await Event.findByIdAndDelete(eventId);
 
@@ -120,7 +115,7 @@ export const deleteEvent = async (req = request, res = response) => {
       event: eventId,
       msg: 'Event deleted',
     });
-  } catch (error) {
+  } catch (error) { 
     console.log(`deleteEvent\n${error}`);
 
     return res.status(500).json({
